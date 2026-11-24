@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Table d’Or – Menu</title>
+<meta name="description" content="La carte de La Table d’Or : sandwichs, plats, pizzas, tacos, burgers et spécialités.">
+<meta name="theme-color" content="#3a0d12">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍴</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#3a0d12;--panel:#4b1219;--line:#7a3a3f;--gold:#e0b862;--cream:#f7ecd6;--muted:#d4b9a4;--red:#b3202c}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:68px}
+body{background:var(--bg);color:var(--cream);font:400 16px/1.5 "Nunito Sans",system-ui,sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+header{text-align:center;padding:48px 20px 28px;background:radial-gradient(ellipse at top,#7b1b25 0%,var(--bg) 70%)}
+.logo{font-size:34px}
+h1{font:700 clamp(34px,10vw,56px)/1.05 Cinzel,Georgia,serif;color:var(--gold);letter-spacing:.04em;margin-top:6px}
+header p{color:var(--muted);margin-top:10px}
+nav{position:sticky;top:0;z-index:5;background:rgba(58,13,18,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);display:flex;gap:8px;overflow-x:auto;padding:12px 14px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;color:var(--cream);text-decoration:none;font-weight:600;font-size:14px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+nav a:hover,nav a:focus-visible{background:var(--gold);color:var(--bg);outline:none}
+main{max-width:720px;margin:0 auto;padding:8px 16px 40px}
+section{padding-top:32px}
+h2{font:700 26px/1.2 Cinzel,Georgia,serif;color:var(--gold);display:flex;align-items:center;gap:10px}
+h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.note{color:var(--muted);font-size:14px;margin-top:4px}
+.legend{display:flex;justify-content:flex-end;gap:14px;font-size:13px;color:var(--gold);font-weight:700;margin-top:10px;padding-right:2px}
+.legend span{min-width:74px;text-align:center}
+ul{list-style:none;padding:0;margin-top:10px}
+li{display:flex;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px}
+.ico{font-size:26px;width:38px;text-align:center;flex:none}
+.txt{flex:1;min-width:0}
+.name{font-weight:700;font-size:17px;line-height:1.25}
+.desc{font-size:13px;color:var(--muted);margin-top:2px}
+.price{flex:none;display:flex;gap:14px}
+.price b{display:block;min-width:74px;text-align:center;background:var(--gold);color:#3a0d12;font-weight:700;border-radius:10px;padding:5px 6px;font-size:15px;white-space:nowrap}
+.price b small{font-weight:600;font-size:11px;margin-left:2px}
+.price b.ask{background:transparent;color:var(--gold);border:1px dashed var(--gold);font-size:12px;white-space:normal;line-height:1.2}
+.dual .price b{min-width:74px}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px 36px;border-top:1px solid var(--line)}
+footer strong{font-family:Cinzel,Georgia,serif;color:var(--gold);font-size:16px;display:block;margin-bottom:4px}
+@media(max-width:480px){li{padding:10px}.ico{font-size:22px;width:30px}.name{font-size:16px}.price{gap:6px}.price b,.legend span{min-width:62px}.legend{gap:6px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo" aria-hidden="true">🍴</div>
+  <h1>La Table d’Or</h1>
+  <p>Notre carte · Prix en dinars (DA)</p>
+</header>
+<nav id="nav" aria-label="Catégories"></nav>
+<main id="menu"></main>
+<footer>
+  <strong>La Table d’Or</strong>
+  Bon appétit ! Demandez à notre équipe pour toute précision.
+</footer>
+
+<script>
+/* ==== MODIFIER LES PRIX / PLATS ICI ====
+   p : prix en DA. Deux prix = [sandwich, plat]. null = "Sur demande". */
+const MENU = [
+ {id:"frites", t:"Sandwichs & plats frites", e:"🥖", cols:["Sandwich","Plat"], items:[
+  {n:"Frite", d:"Frites maison croustillantes", i:"🍟", p:[100,150]},
+  {n:"Frite Omelette", d:"Frites et omelette", i:"🍳", p:[150,200]},
+  {n:"Frite Omelette Fromage", d:"Frites, omelette et fromage fondu", i:"🧀", p:[200,250]},
+  {n:"Frite Omelette Viande Hachée", d:"Frites, omelette et viande hachée", i:"🥩", p:[250,300]},
+  {n:"Frite Omelette Merguez", d:"Frites, omelette et merguez grillée", i:"🌭", p:[350,380]},
+  {n:"Frite Poulet Mariné", d:"Frites et poulet mariné", i:"🍗", p:[450,600]},
+  {n:"Omelette au Fromage", d:"Omelette garnie de fromage", i:"🧀", p:[150,150]},
+  {n:"Omelette au Thon", d:"Omelette garnie de thon", i:"🐟", p:[200,200]}
+ ]},
+ {id:"viandes", t:"Viandes & plats", e:"🥩", items:[
+  {n:"Entrecôte", i:"🥩", p:[1350]},
+  {n:"Steak", i:"🥩", p:[1350]},
+  {n:"Steak Haché", i:"🍔", p:[600]},
+  {n:"Escalope", i:"🍗", p:[750]},
+  {n:"Rôti", i:"🍖", p:[1300]},
+  {n:"Sauté", i:"🍲", p:[1000]},
+  {n:"Royale", d:"Notre plat signature", i:"👑", p:[1800]},
+  {n:"Poulet", i:"🍗", p:[600]}
+ ]},
+ {id:"melanges", t:"Mélanges & salades", e:"🥗", items:[
+  {n:"Mélange à 3", i:"🍽️", p:[250]},
+  {n:"Mélange à 4", i:"🍽️", p:[300]},
+  {n:"Mélange à 3 avec gratin", d:"Gratiné au fromage", i:"🧀", p:[300]},
+  {n:"Mélange à 4 avec gratin", d:"Gratiné au fromage", i:"🧀", p:[350]},
+  {n:"Frite Sardine", i:"🐟", p:[300]},
+  {n:"Macédoine", i:"🥕", p:[200]},
+  {n:"Salade Variée", i:"🥗", p:[200]},
+  {n:"Salade au Thon", i:"🥗", p:[300]},
+  {n:"Salade au Fromage", i:"🥗", p:[350]}
+ ]},
+ {id:"specialites", t:"Spécialités", e:"🍛", note:"Plats traditionnels, à demander à l’équipe.", items:[
+  {n:"Bouzelouf", i:"🍖", p:null},
+  {n:"Chtitha", i:"🌶️", p:[900]},
+  {n:"Méchoui", i:"🔥", p:null},
+  {n:"Méchoui de chevreau", i:"🔥", p:null},
+  {n:"Dewara", i:"🍲", p:[700]},
+  {n:"Mtouwem", i:"🧄", p:[600]},
+  {n:"Couscous", i:"🍛", p:[300]},
+  {n:"Poisson", i:"🐟", p:null}
+ ]},
+ {id:"snacks", t:"Panini, burgers & tacos", e:"🌮", items:[
+  {n:"Panini Viande Hachée", i:"🥪", p:[300]},
+  {n:"Panini Poulet", i:"🥪", p:[350]},
+  {n:"Panini Fromages", i:"🧀", p:[300]},
+  {n:"Panini Thon", i:"🥪", p:[300]},
+  {n:"Hamburger Viande Hachée", i:"🍔", p:[400]},
+  {n:"Hamburger Poulet", i:"🍔", p:[500]},
+  {n:"Double Cheese V.H", d:"Double fromage, viande hachée", i:"🍔", p:[500]},
+  {n:"Tacos Viande", i:"🌮", p:[500]},
+  {n:"Tacos Poulet", i:"🌯", p:[600]},
+  {n:"Tacos Mixte", d:"Viande et poulet", i:"🌯", p:[750]}
+ ]},
+ {id:"pizzas", t:"Pizzas", e:"🍕", items:[
+  {n:"Pizza Marguerite", d:"Sauce tomate, olive noire, olive verte, fromage", i:"🍕", p:[350]},
+  {n:"Pizza Napolitaine", d:"Sauce tomate, viande hachée, olive noire, fromage", i:"🍕", p:[350]},
+  {n:"Pizza Rustique", d:"Sauce tomate, viande hachée, œufs, olive, fromage", i:"🍕", p:[400]},
+  {n:"Pizza Orientale", d:"Sauce tomate, merguez, œufs, olive, fromage", i:"🍕", p:[400]},
+  {n:"Pizza Royale", d:"Sauce tomate, garniture royale, olive, fromage", i:"🍕", p:[450]},
+  {n:"Pizza Polonaise", d:"Sauce tomate, viande hachée, thon, champignon, câpre, olive, fromage", i:"🍕", p:[500]},
+  {n:"Pizza Quatre Saisons", d:"Sauce tomate, viande hachée, merguez, thon, champignon, olive, fromage", i:"🍕", p:[600]},
+  {n:"Pizza Chiken", d:"Sauce tomate, poulet, olive, fromage", i:"🍕", p:[600]},
+  {n:"Pizza Mixicaine", d:"Sauce tomate, thon, olive, fromage", i:"🌶️", p:[450]},
+  {n:"Pizza Chef (bordure fromage)", d:"Viande hachée, merguez, thon, champignon, câpre, poulet, olive, fromage", i:"👨‍🍳", p:[700]},
+  {n:"Pizza 3 Fromages", i:"🧀", p:[650]},
+  {n:"Pizza 4 Fromages", i:"🧀", p:[750]}
+ ]},
+ {id:"boissons", t:"Boissons", e:"🥤", items:[
+  {n:"Boissons 1L", i:"🥤", p:[150]},
+  {n:"Boissons PM", d:"Petit modèle", i:"🥤", p:[70]},
+  {n:"Eau minérale", d:"Petite 30 DA · Grande 50 DA", i:"💧", p:[30,50], cols:["PM","GM"]}
+ ]}
+];
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const price=(p,cols)=>{
+  if(p===null) return '<div class="price"><b class="ask">Sur demande</b></div>';
+  return '<div class="price">'+p.map(v=>'<b>'+v+'<small>DA</small></b>').join("")+'</div>';
+};
+$("#nav").innerHTML=MENU.map(s=>`<a href="#${s.id}">${s.e} ${esc(s.t)}</a>`).join("");
+$("#menu").innerHTML=MENU.map(s=>{
+  const dual=s.cols?' class="dual"':'';
+  return `<section id="${s.id}"><h2>${esc(s.t)}</h2>`+
+    (s.note?`<p class="note">${esc(s.note)}</p>`:"")+
+    (s.cols?`<div class="legend">${s.cols.map(c=>`<span>${c}</span>`).join("")}</div>`:"")+
+    `<ul${dual}>`+s.items.map(x=>
+      `<li><div class="ico" aria-hidden="true">${x.i||s.e}</div><div class="txt"><div class="name">${esc(x.n)}</div>`+
+      (x.d?`<div class="desc">${esc(x.d)}</div>`:"")+`</div>${price(x.p)}</li>`).join("")+`</ul></section>`;
+}).join("");
+</script>
+</body>
+</html>
